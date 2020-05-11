@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stable
 
 LABEL description="Provides an image with Janus Gateway"
 
