@@ -1,6 +1,5 @@
 FROM debian:jessie
 
-LABEL maintainer="Linagora Folks <lgs-openpaas-dev@linagora.com>"
 LABEL description="Provides an image with Janus Gateway"
 
 RUN apt-get update -y \
@@ -35,7 +34,7 @@ RUN apt-get install -y \
 RUN cd ~ \
     && git clone https://github.com/cisco/libsrtp.git \
     && cd libsrtp \
-    && git checkout v2.0.0 \
+    && git checkout v2.3.0 \
     && ./configure --prefix=/usr --enable-openssl \
     && make shared_library \
     && sudo make install
@@ -51,7 +50,7 @@ RUN cd ~ \
 RUN cd ~ \
     && git clone https://github.com/warmcat/libwebsockets.git \
     && cd libwebsockets \
-    && git checkout v2.1.0 \
+    && git checkout v4.0.7 \
     && mkdir build \
     && cd build \
     && cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr .. \
