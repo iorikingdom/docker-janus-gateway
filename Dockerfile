@@ -6,6 +6,9 @@ RUN apt-get update -y \
     && apt-get upgrade -y
 
 RUN apt-get install -y \
+    wget \
+    flex \
+    bison \
     build-essential \
     libmicrohttpd-dev \
     libjansson-dev \
@@ -18,6 +21,7 @@ RUN apt-get install -y \
     libini-config-dev \
     libcollection-dev \
     pkg-config \
+    libconfig-dev \
     gengetopt \
     libtool \
     autotools-dev \
@@ -27,9 +31,18 @@ RUN apt-get install -y \
     sudo \
     make \
     git \
-    doxygen \
     graphviz \
     cmake
+
+RUN cd ~ \
+    && wget https://github.com/doxygen/doxygen/archive/Release_1_8_11.tar.gz \
+    && tar -zxvf Release_1_8_11.tar.gz \
+    && cd doxygen-Release_1_8_11 \
+    && mkdir build \
+    && cd build \
+    && cmake -G "Unix Makefiles" .. \
+    && make \
+    && sudo make install
 
 RUN cd ~ \
     && git clone https://github.com/cisco/libsrtp.git \
