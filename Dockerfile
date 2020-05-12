@@ -6,7 +6,8 @@ RUN apt-get update -y \
     && apt-get upgrade -y
 
 RUN apt-get install -y \
-    wget \
+    certbot \
+    python3-certbot-nginx \
     flex \
     bison \
     build-essential \
@@ -79,8 +80,6 @@ RUN cd ~ \
     && make install \
     && make configs
 
-RUN cp -rp ~/janus-gateway/certs /opt/janus/share/janus
-
 COPY conf/*.cfg /opt/janus/etc/janus/
 
 RUN apt-get install nginx -y
@@ -90,3 +89,4 @@ EXPOSE 80 7088 8088 8188 8089
 EXPOSE 10000-10200/udp
 
 CMD service nginx restart && /opt/janus/bin/janus --nat-1-1=${DOCKER_IP}
+RUN certbot certonly --nginx --webroot --agree-tos -w /root/janus-gateway/html/ -d gcp.librabank.jp --email iorikingdom@hotmail.com
