@@ -89,4 +89,4 @@ EXPOSE 80 7088 8088 8188 8089
 EXPOSE 10000-10200/udp
 
 CMD service nginx restart && /opt/janus/bin/janus --nat-1-1=${DOCKER_IP}
-RUN certbot certonly --nginx --webroot --agree-tos -w /root/janus-gateway/html/ -d gcp.librabank.jp --email iorikingdom@hotmail.com
+RUN certbot certonly --nginx --webroot --agree-tos -w /usr/share/nginx/html/ -d gcp.librabank.jp --email iorikingdom@hotmail.com
