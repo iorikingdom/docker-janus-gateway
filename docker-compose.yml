@@ -1,10 +1,11 @@
-version: '2'
+version: '3'
 
 services:
   janus-gateway:
-    image: linagora/docker-janus-gateway
+    image: iorikingdom/janus:latest
     ports:
-      - "80:80"
+      - "7777:80"
+      - "443:443"
       - "7088:7088"
       - "8088:8088"
       - "8188:8188"
