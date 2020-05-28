@@ -4,12 +4,27 @@ services:
   janus-gateway:
     image: iorikingdom/janus:latest
     ports:
-      - "7777:80"
+      - "80:80"
       - "443:443"
       - "7088:7088"
       - "8088:8088"
       - "8188:8188"
       - "8089:8089"
       - "10000-10200:10000-10200/udp"
+    volumes:
+      - ./loggers:/opt/janus/lib/janus/loggers
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      janus_net:
+        ipv4_address: 172.18.0.3
+
     environment:
-      - DOCKER_IP=${DOCKER_IP}
+      - DOCKER_IP=147.192.7.22
+
+networks:
+  janus_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.18.0.0/16"
+
